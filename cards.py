@@ -4,7 +4,6 @@ import random
 class Card(object):
 	"""docstring for cards"""
 	suits = ["hearts", "diamonds", "clubs", "spades"]
-
 	values = ["Zero","Ace","2","3","4","5","6","7","8","9","10","Jack","Queen","King"]
 	
 	def __init__(self, suit=0, value=0):
@@ -41,10 +40,9 @@ class Deck(object):
 
 
 	def deal(self):
-		hand = ""
+		# hand = ""
 		# for x in xrange(0,2,1):
-		hand = self.cards.pop()
-		return hand
+		return self.cards.pop()
 		
 	
 	def print_deck(self):
@@ -61,6 +59,13 @@ class Player(object):
 		else:
 			print "Let's play!"
 		self.balance = 1000
+		self.hand = []
+
+
+	def draw(self, deck):
+		self.hand.append(deck.deal())
+		return self
+
 
 
 	# def betting(self):
@@ -69,7 +74,11 @@ class Player(object):
 	# def hit(self):
 	# 	self.hit = hit
 		
-deck1=Deck()		
-print deck1.shuffle().deal()
+deck1 = Deck()		
+deck1.shuffle()
 
-player1=Player('Bob',23)
+player1 = Player('Bob',23)
+
+player1.draw(deck1).draw(deck1)
+
+print player1.hand[0]
